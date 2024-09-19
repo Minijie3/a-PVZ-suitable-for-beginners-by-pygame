@@ -1,0 +1,34 @@
+import pygame
+import sys
+import image
+from pygame.locals import *
+
+#initialization of pygame
+pygame.init()
+
+#Create pygame window
+DS=pygame.display.set_mode( (1280,600) )
+
+#Create pic
+Background=image.Image('pic/other/back.png')
+
+while True:
+    for event in pygame.event.get():
+        if event.type==QUIT:
+            pygame.quit()
+            sys.exit()
+#             R   G   B
+    DS.fill( (255,255,255) )
+    Background.draw(DS)
+    pygame.display.update()
+------------------------------------------------------------
+
+import pygame
+
+class Image(pygame.sprite.Sprite):
+    def __init__(self, image_path): 
+        self.path=image_path
+        self.image=pygame.image.load(self.path)
+
+    def draw(self,DS):
+        DS.blit(self.image,self.image.get_rect()) 
