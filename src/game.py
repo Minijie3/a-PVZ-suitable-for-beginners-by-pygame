@@ -12,7 +12,7 @@ from const import *
 class game(object):
     def __init__(self, DS) :
         self.window = DS
-        self.gold = 100000
+        self.gold = 100
         self.goldfont = pygame.font.Font(None, 60)
         self.zomcnt = 0
         self.zombieGenTime = time.time()
