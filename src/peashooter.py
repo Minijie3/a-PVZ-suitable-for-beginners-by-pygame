@@ -21,3 +21,5 @@ class peashooter(objectbase.Object):
             return peabullet.peabullet(NORM_PEABULLET_ID, (self.pos[0] + 80, self.pos[1] + 35))
         else:
             return None
+        
+        

@@ -24,13 +24,14 @@ def pvz():
                 #  R   B   G    ( maxmum=255, minimum=0 )
         DS.fill( (255,255,255) )
 
-        Game.addFreeSunshine()
-        Game.addZombie()
-        Game.CheckFight()
-        Game.eat()
-        Game.CheckCache()
-        Game.update()
-        Game.lose_game()
+        if Game.isbegin:
+            Game.addFreeSunshine()
+            Game.addZombie()
+            Game.CheckFight()
+            Game.eat()
+            Game.CheckCache()
+            Game.update()
+            Game.lose_game()
         Game.draw()
         pygame.display.update()
 

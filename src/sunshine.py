@@ -61,3 +61,5 @@ class sunshine_summon_sunflower(sunshine):
         judgement = self.CheckSummon_interval(self.get_Data()['INTERVAL_SUMMON_SUNFLOWER'])
         if judgement:
             super(sunshine_summon_sunflower,self).draw(DS)
+
+            

@@ -32,7 +32,7 @@ data={
         'POS_TIME': 0.2,
         'INDEX_TIME': 0.2,
         'SUMMON_TIME': -1,
-        'SPEED_L': 2.4,
+        'SPEED_L': 2.4, 
         'SPEED_R': 0,
         'SPEED_U': 0,
         'SPEED_D': 0,
@@ -129,3 +129,4 @@ data={
         'ATTACK': 0,
     }
 }
+

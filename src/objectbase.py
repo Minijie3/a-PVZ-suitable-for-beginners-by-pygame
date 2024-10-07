@@ -75,3 +75,5 @@ class Object(image.Image):
     def update(self):
         self.CheckIndex()
         self.Move()
+
+        

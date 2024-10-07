@@ -32,3 +32,5 @@ class Image(pygame.sprite.Sprite):
 
     def draw(self, DS):
         DS.blit(self.image, self.Get_Rect())
+
+        

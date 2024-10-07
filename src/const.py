@@ -14,3 +14,8 @@ SUNSHINE_ID = 4
 NORM_PEASHOOTER_ID = 5
 
 LOSE_PATH = 'pic/other/lose.png'
+BEGIN_PATH = 'pic/other/game_start.png'
+BEGIN_BUTTON_PATH = 'pic/other/tw_offline_enter_game.png'
+BEGIN_BUTTON_SIZE = (250, 67)
+BEGIN_BUTTON_POS = (630, 430)
+

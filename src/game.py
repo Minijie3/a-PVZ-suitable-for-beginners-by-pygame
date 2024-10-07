@@ -12,13 +12,17 @@ from const import *
 class game(object):
     def __init__(self, DS) :
         self.window = DS
-        self.gold = 50
+        self.gold = 100000
         self.goldfont = pygame.font.Font(None, 60)
+        self.zomcnt = 0
         self.zombieGenTime = time.time()
         self.freeSunshineGenTime = time.time()
         self.back = ob.Object(0, (0,0))
         self.lose = image.Image(LOSE_PATH, 0, 0, WINDOW_SIZE, (0,0))
+        self.begin_page = image.Image(BEGIN_PATH, 0, 0, WINDOW_SIZE, (0,0))
+        self.begin_button = image.Image(BEGIN_BUTTON_PATH, 0, 0, BEGIN_BUTTON_SIZE, BEGIN_BUTTON_POS)
         self.islose = False
+        self.isbegin = False
         self.plants = []
         self.zombies = []
         self.others = []
@@ -56,11 +60,14 @@ class game(object):
             self.gold -= item.get_price()
 
     def addZombie(self):
-        if time.time() - self.zombieGenTime > 15: 
+        flag = self.zomcnt // 4
+        zomtime = 15 - flag if (15 - flag) > 5 else 5
+        if time.time() - self.zombieGenTime > zomtime: 
             addPos = (WINDOW_SIZE[0], LEFT_TOP[1] + random.randint(0, 4) * GRID_SIZE[1])
             item = zom.zombiebaseob(NORM_ZOMBIE_ID, addPos)
             self.zombies.append(item)
             self.zombieGenTime = time.time()
+            self.zomcnt += 1
 
     def addFreeSunshine(self):
         if time.time() - self.freeSunshineGenTime > 8: 
@@ -87,7 +94,10 @@ class game(object):
             self.renew(summon)
 
     def draw(self):
-        if not self.islose:
+        if not self.isbegin:
+            self.begin_page.draw(self.window)
+            self.begin_button.draw(self.window)
+        elif not self.islose and self.isbegin:
             self.back.draw(self.window)
             for plant in self.plants:
                 plant.draw(self.window)
@@ -108,6 +118,9 @@ class game(object):
         if self.islose:
             return
         mousePos = pygame.mouse.get_pos()
+        if not self.isbegin:
+            self.begin_game(mousePos)
+            return 
         lootcheck_summon = self.CheckLoot_summon(mousePos)
         lootcheck_other = self.CheckLoot_other(mousePos)
         if lootcheck_summon or lootcheck_other: # If there is happening a loot, ignore other things.
@@ -205,7 +218,15 @@ class game(object):
                 if other.loot_flag:
                     self.others.remove(other)
 
+    def begin_game(self,mousePos):
+        rect = self.begin_button.Get_Rect()
+        if rect.collidepoint(mousePos):
+            self.isbegin = True
+        self.zombieGenTime = time.time()
+        self.freeSunshineGenTime = time.time()
+
     def lose_game(self):
         for zombie in self.zombies:
             if zombie.pos[0] <= 220:
                 self.islose = True
+
